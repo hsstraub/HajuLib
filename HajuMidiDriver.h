@@ -8,11 +8,10 @@
   ==============================================================================
 */
 
-#ifndef HAJUMIDIDRIVER_H_INCLUDED
-#define HAJUMIDIDRIVER_H_INCLUDED
+#pragma once
 
 //[Headers]     -- You can add your own extra header files here --
-#include "JuceHeader.h"
+#include <JuceHeader.h>
 //[/Headers]
 
 
@@ -28,18 +27,18 @@ public:
 	~HajuMidiDriver();
 
 	// List of MIDI input device names
-	StringArray getMidiInputList();
+	juce::StringArray getMidiInputList();
 	// List of MIDI output device names
-	StringArray getMidiOutputList();
+	juce::StringArray getMidiOutputList();
 
 	// Open the specified input device
-	void setMidiInput(int deviceIndex, MidiInputCallback* callback);
+	void setMidiInput(int deviceIndex, juce::MidiInputCallback* callback);
 
 	// Open the specified output device
 	void setMidiOutput(int deviceIndex);
 
 	// Send a MIDI message directly
-	void sendMessageNow(const MidiMessage& message);
+	void sendMessageNow(const juce::MidiMessage& message);
 
 	// Higher level commands
 	void sendNoteOnMessage(int noteNumber, int channelNumber, uint8 velocity);
@@ -58,5 +57,3 @@ protected:
 	// Currently open MIDI output
   std::unique_ptr<MidiOutput> midiOutput = nullptr;
 };
-
-#endif  // HAJUMIDIDRIVER_H_INCLUDED
