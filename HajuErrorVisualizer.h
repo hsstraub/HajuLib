@@ -17,18 +17,20 @@ class HajuErrorVisualizer
 {
     // Types
 public:
-	typedef enum
-	{
-		noError = 0,
-		warning = 1,
-		error = 2
-	} ErrorLevel;
+    typedef enum
+    {
+        noError = 0,
+        warning = 1,
+        error = 2
+    } ErrorLevel;
 
 public:
     HajuErrorVisualizer(LookAndFeel& lookAndFeelValue);
 
-	// Methods
+    // Methods
 public:
+    void setErrorLevel(ErrorLevel errorLevel, String toolTipText);
+
     void setErrorLevel(
         SettableTooltipClient& tooltipClient,
         Component& component,
@@ -37,14 +39,17 @@ public:
         int bgColourId);
 
     void setErrorLevel(TextEditor& textEdit, ErrorLevel errorLevel, String toolTipText) {
-        return setErrorLevel(textEdit, textEdit, errorLevel, toolTipText,  TextEditor::backgroundColourId);
+        return setErrorLevel(textEdit, textEdit, errorLevel, toolTipText, TextEditor::backgroundColourId);
     }
 
     void setErrorLevel(Label& label, ErrorLevel errorLevel, String toolTipText) {
-        return setErrorLevel(label, label, errorLevel, toolTipText,  Label::backgroundColourId);
+        return setErrorLevel(label, label, errorLevel, toolTipText, Label::textColourId);
     }
 
-// Attributes
+    // Attributes
 private:
-    LookAndFeel& lookAndFeel;
+    LookAndFeel&  lookAndFeel;
+    ErrorLevel    lastErrorLevel;
+    String        currentText;
+    Array<Colour> errorLevelColours = { Colour(0xff84aea3), Colour(0xffc9c238), Colour(0xffd7002a) };
 };
